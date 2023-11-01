@@ -6,6 +6,7 @@ import OutputHistogram from "./GenerateHistogram";
 import Divider from "@mui/material/Divider";
 
 function DataParentComponent() {
+  
   const originalData = jsonData;
   const [filteredData, setFilteredData] = useState(originalData);
 

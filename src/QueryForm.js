@@ -8,8 +8,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Grid, Box, Typography } from "@mui/material";
 
 function QueryForm({ onApplyFilter, onClearFilters }) {
-  const dataEntries = Object.values(jsonData);
-  const inputTitles = Object.keys(dataEntries[0].inputs);
+  var validData = {}
+  if (jsonData.length !== 0) {
+    validData = jsonData
+  }
+  const dataEntries = Object.values(validData);
+  var inputs = []
+  if (dataEntries.length !== 0) {
+    inputs = dataEntries[0].inputs
+  }
+  const inputTitles = Object.keys(inputs);
   const relationalOperators = ["=", ">", "<", ">=", "<=", "!="];
 
   const [filters, setFilters] = useState([]);
