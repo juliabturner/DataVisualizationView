@@ -5,9 +5,9 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { spacing } from '@mui/system';
-import { Box } from '@mui/system';
-import './QueryForm.css';
+import { Grid } from '@mui/material';
+import { Box } from '@mui/material';
+import { Typography } from '@mui/material';
 
 function QueryForm({ onApplyFilter, onClearFilters }) {
   const dataEntries = Object.values(jsonData);
@@ -56,61 +56,84 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
     <div>
       <h2>Filter Data</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      <div>
-        <Select
-          value={newFilter.column}
-          onChange={(e) => setNewFilter({ ...newFilter, column: e.target.value })}
-        >
-          {inputTitles.map((title, index) => (
-            <MenuItem key={index} value={title}>
-              {title}
-            </MenuItem>
-          ))}
-        </Select>
-        <Select
-          value={newFilter.operator}
-          onChange={(e) => setNewFilter({ ...newFilter, operator: e.target.value })}
-        >
-          {relationalOperators.map((title, index) => (
-            <MenuItem key={index} value={title}>
-              {title}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          type="text"
-          value={newFilter.value}
-          onChange={(e) => setNewFilter({ ...newFilter, value: e.target.value })}
-        />
-        <Button variant="contained" onClick={handleAddFilter}>
-          Add Filter
-        </Button>
-      </div>
-      <div>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item>
+          <Select
+            value={newFilter.column}
+            onChange={(e) => setNewFilter({ ...newFilter, column: e.target.value })}
+          >
+            {inputTitles.map((title, index) => (
+              <MenuItem key={index} value={title}>
+                {title}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        <Grid item>
+          <Select
+            value={newFilter.operator}
+            onChange={(e) => setNewFilter({ ...newFilter, operator: e.target.value })}
+          >
+            {relationalOperators.map((title, index) => (
+              <MenuItem key={index} value={title}>
+                {title}
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        <Grid item>
+          <TextField
+            type="text"
+            value={newFilter.value}
+            onChange={(e) => setNewFilter({ ...newFilter, value: e.target.value })}
+          />
+        </Grid>
+        <Grid item>
+          <Button variant="contained" onClick={handleAddFilter}>
+            Add Filter
+          </Button>
+        </Grid>
+      </Grid>
+      <div justifyContent="center">
         {filters.map((filter, index) => (
-          <div key={index}>
-            {filter.column} {filter.operator} {filter.value}
-            <Button
-              variant="outlined"
-              onClick={() => handleDeleteFilter(index)}
+            <div
+            key={index}
+            style={{
+                display: 'flex',
+                alignItems: 'center', // Align items vertically in the center
+                padding: '8px',
+                margin: '3px 10px', // 8px top and bottom, 10px left and right
+                justifyContent: 'center'
+            }}
             >
-              <DeleteIcon />
+            <Typography variant="body1" style={{ fontWeight: 'bold', marginRight:'10px'}}>
+                {filter.column} {filter.operator} {filter.value}
+            </Typography>
+            <Button
+                variant="outlined"
+                onClick={() => handleDeleteFilter(index)}
+            >
+                <DeleteIcon />
             </Button>
-          </div>
+            </div>
         ))}
       </div>
-      <div>
-        <Box sx={{ m: '0.2rem' }} >
-            <Button variant="contained" onClick={handleClearFilter} className='buttonSpacing'>
-            CLEAR
+      <Grid container spacing={2} mt={1} justifyContent="center">
+        <Grid item>
+          <Box sx={{ m: 0.2 }}>
+            <Button variant="contained" onClick={handleClearFilter}>
+              CLEAR
             </Button>
-        </Box>
-        <Box sx={{ m: '0.2rem' }}>
-            <Button variant="contained" onClick={handleApplyFilter} className='buttonSpacing'>
-            APPLY
+          </Box>
+        </Grid>
+        <Grid item>
+          <Box sx={{ m: 0.2 }}>
+            <Button variant="contained" onClick={handleApplyFilter}>
+              APPLY
             </Button>
-        </Box>
-      </div>
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   );
 }

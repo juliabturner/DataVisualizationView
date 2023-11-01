@@ -12,18 +12,11 @@ function OutputHistogram({ data, outputTitle }) {
     const width = 600 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
-    const svg = d3.select(svgRef.current)
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
-
     const outputData = Object.values(data).map((experiment) => experiment.outputs);
 
     if (outputData.length === 0) {
         return;
-      }
+    }
 
     const outputValues = outputData.map((experimentOutputs) => experimentOutputs[{outputTitle}]);
     const outputTitles = Object.keys(outputData[0]);
@@ -34,9 +27,12 @@ function OutputHistogram({ data, outputTitle }) {
     const y = d3.scaleLinear()
       .range([height, 0]);
 
+    console.log('Output Titles', outputTitles)
+
     outputTitles.forEach((outputTitle) => {
         const outputValues = outputData.map((experimentOutputs) => experimentOutputs[outputTitle]);
-        x.domain([d3.min(outputValues), d3.max(outputValues)]);
+        x.domain([d3.min(outputValues)-1, d3.max(outputValues)+1]);
+        y.domain([0, 1]); 
       
         const histogram = d3.histogram()
             .domain(x.domain())
@@ -82,7 +78,7 @@ function OutputHistogram({ data, outputTitle }) {
 
   return (
     <div>
-      <h3>Generated Histograms</h3>
+      <h2>Generated Histograms</h2>
       <div ref={svgRef}></div>
     </div>
   );
