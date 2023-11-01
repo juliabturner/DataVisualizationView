@@ -9,12 +9,11 @@
 
 https://github.com/juliabturner/DataVisualizationView/assets/60072112/c8f0f8d9-d93c-4a4f-934f-2fe43c261edc
 
-You can try it out yourself by doing the following steps:
+## Try it out!
 
-1. Cloning this repository
-2. In terminal, navigate to the directory
+1. Clone this repository
+2. Using a command line, navigate to the directory
 3. Run `npm install`
 4. Run `npm start`
 
 Current .json formatting can be found in the assets folder - code can be changed to accomodate different datasets.
-  
