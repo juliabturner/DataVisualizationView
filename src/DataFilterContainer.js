@@ -36,7 +36,7 @@ function DataParentComponent() {
               } else if (operator === "<=") {
                 return inputValue <= value;
               } else {
-                return inputValue === value;
+                return inputValue == value;
               }
             }
             return false;
