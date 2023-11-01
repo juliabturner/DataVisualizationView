@@ -1,5 +1,5 @@
-import './App.css';
-import DataParentComponent from './DataFilterContainer';
+import "./App.css";
+import DataParentComponent from "./DataFilterContainer";
 
 function App() {
   return (

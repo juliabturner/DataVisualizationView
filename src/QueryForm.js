@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import jsonData from './assets/frontenddataset.json';
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Grid } from '@mui/material';
-import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
+import React, { useState } from "react";
+import jsonData from "./assets/frontenddataset.json";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Grid, Box, Typography } from "@mui/material";
 
 function QueryForm({ onApplyFilter, onClearFilters }) {
   const dataEntries = Object.values(jsonData);
   const inputTitles = Object.keys(dataEntries[0].inputs);
-  const relationalOperators = ['=', '>', '<', '>=', '<=', '!='];
-  const outputTitles = Object.keys(dataEntries[0].outputs);
+  const relationalOperators = ["=", ">", "<", ">=", "<=", "!="];
 
   const [filters, setFilters] = useState([]);
   const [newFilter, setNewFilter] = useState({
     column: inputTitles[0],
     operator: relationalOperators[0],
-    value: '',
+    value: "",
   });
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleAddFilter = () => {
     if (newFilter.column && newFilter.operator && newFilter.value) {
@@ -30,11 +27,11 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
       setNewFilter({
         column: newFilter.column,
         operator: newFilter.operator,
-        value: '',
+        value: "",
       });
-      setError('');
+      setError("");
     } else {
-      setError('Please fill in all fields.');
+      setError("Please fill in all fields.");
     }
   };
 
@@ -55,12 +52,14 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
   return (
     <div>
       <h2>Filter Data</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           <Select
             value={newFilter.column}
-            onChange={(e) => setNewFilter({ ...newFilter, column: e.target.value })}
+            onChange={(e) =>
+              setNewFilter({ ...newFilter, column: e.target.value })
+            }
           >
             {inputTitles.map((title, index) => (
               <MenuItem key={index} value={title}>
@@ -72,7 +71,9 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
         <Grid item>
           <Select
             value={newFilter.operator}
-            onChange={(e) => setNewFilter({ ...newFilter, operator: e.target.value })}
+            onChange={(e) =>
+              setNewFilter({ ...newFilter, operator: e.target.value })
+            }
           >
             {relationalOperators.map((title, index) => (
               <MenuItem key={index} value={title}>
@@ -85,7 +86,9 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
           <TextField
             type="text"
             value={newFilter.value}
-            onChange={(e) => setNewFilter({ ...newFilter, value: e.target.value })}
+            onChange={(e) =>
+              setNewFilter({ ...newFilter, value: e.target.value })
+            }
           />
         </Grid>
         <Grid item>
@@ -96,26 +99,29 @@ function QueryForm({ onApplyFilter, onClearFilters }) {
       </Grid>
       <div justifyContent="center">
         {filters.map((filter, index) => (
-            <div
+          <div
             key={index}
             style={{
-                display: 'flex',
-                alignItems: 'center', // Align items vertically in the center
-                padding: '8px',
-                margin: '3px 10px', // 8px top and bottom, 10px left and right
-                justifyContent: 'center'
+              display: "flex",
+              alignItems: "center", // Align items vertically in the center
+              padding: "8px",
+              margin: "3px 10px", // 8px top and bottom, 10px left and right
+              justifyContent: "center",
             }}
+          >
+            <Typography
+              variant="body1"
+              style={{ fontWeight: "bold", marginRight: "10px" }}
             >
-            <Typography variant="body1" style={{ fontWeight: 'bold', marginRight:'10px'}}>
-                {filter.column} {filter.operator} {filter.value}
+              {filter.column} {filter.operator} {filter.value}
             </Typography>
             <Button
-                variant="outlined"
-                onClick={() => handleDeleteFilter(index)}
+              variant="outlined"
+              onClick={() => handleDeleteFilter(index)}
             >
-                <DeleteIcon />
+              <DeleteIcon />
             </Button>
-            </div>
+          </div>
         ))}
       </div>
       <Grid container spacing={2} mt={1} justifyContent="center">
