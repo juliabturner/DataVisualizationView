@@ -7,7 +7,7 @@
  
 - Demo:
 
-https://github.com/juliabturner/DataVisualizationView/assets/60072112/97e8fe7b-64f3-48e8-adeb-e3f8c084760a
+https://github.com/juliabturner/DataVisualizationView/assets/60072112/11e92169-7fde-4eba-97ef-66974ecabbae
 
 ## Try it out!
 
